@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MA4</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">MainActivity</string>
+    <string name="title_activity_register">Registration</string>
+    <string name="title_activity_welcome">Welcome1</string>
+
+    <string name="Find_Class">Find Class</string>
+    <string name="Add_Drop">Add/Drop</string>
+    <string name="Schedule">Schedule</string>
+    <string name="Settings">Settings</string>
+
+    <string name="option1">Option 1</string>
+    <string name="option2">Option 2</string>
+    <string name="option3">Option 3</string>
+    <string name="save">save</string>
+
+    <string name="map">Map</string>
+    <string name="information">Information</string>
+
+    <string name="CourseNum">CourseNum</string>
+    <string name="EditCourseNum">EditCourseNum</string>
+    <string name="scheduleColumn">column</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnDrop">Drop</string>
+
+
+    <string name="title_activity_web_view">WebView</string>
+    <string name="title_activity_maps">Maps</string>
+
+    <string name="course">course</string>
+    <string name="tableLayout1">tableLayout</string>
+
+</resources>
