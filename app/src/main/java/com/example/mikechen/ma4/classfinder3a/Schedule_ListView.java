@@ -58,13 +58,18 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         sSchedule.AddClass(c);
         setScheduleArray();
         i++;
+        ArrayList<Schedule_Class> s = sSchedule.GetClasses();
+        mScheduleArray.clear();
+        while (!s.isEmpty()) {
+            mScheduleArray.add(s.remove(0).CourseNumber + "");
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.schedule_add:
-                Schedule_Class c = new Schedule_Class("", (double)i, (double)i+1, "", null);
+                Schedule_Class c = new Schedule_Class(i, "", i, i, i, null);
                 addItems(c);
                 break;
         }

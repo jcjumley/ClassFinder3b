@@ -29,14 +29,49 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:name=".MainActivity"
+            android:label="Main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Registration"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".WebView"
+            android:label="@string/title_activity_web_view" >
+        </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
+        </activity>
+        <activity
+            android:name=".Home"
+            android:label="Home" >
+        </activity>
+        <activity
+            android:name=".Find_Class"
+            android:label="Find_Class" >
+        </activity>
+
+        <activity android:name=".Scheduler"
+                  android:label="Scheduler">
+
+        </activity>
+
+        <activity android:name=".Schedule_ListView"
+                  android:label="Scheduler_ListView">
+        </activity>
+
+        <service
+            android:name=".MyInternetService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
