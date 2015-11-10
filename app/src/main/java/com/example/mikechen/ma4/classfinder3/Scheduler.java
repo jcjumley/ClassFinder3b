@@ -1,4 +1,4 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -63,7 +63,7 @@ public class Scheduler extends Activity implements OnClickListener{
         SQLiteDatabase db = DB.getWritableDatabase();
 //        SQLiteDatabaseDatabase db= DD.createRegister(values);
         ContentValues values = new ContentValues();
-        values.put("course", coursenum);
+        values.put("class_num", coursenum);
 
         // Create a new map of values, where column names are the keys
         String course_num=courseNumber.getText().toString();

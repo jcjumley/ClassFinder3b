@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mikechen.ma4.classfinder3a" >
+    package="com.example.mikechen.ma4.classfinder3" >
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -29,7 +29,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.mikechen.ma4.classfinder3.MainActivity"
             android:label="Main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,37 +38,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registration"
+            android:name="com.example.mikechen.ma4.classfinder3.Registration"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name=".WebView"
+            android:name="com.example.mikechen.ma4.classfinder3.WebView"
             android:label="@string/title_activity_web_view" >
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name="com.example.mikechen.ma4.classfinder3.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".Home"
+            android:name="com.example.mikechen.ma4.classfinder3.Home"
             android:label="Home" >
         </activity>
         <activity
-            android:name=".Find_Class"
+            android:name="com.example.mikechen.ma4.classfinder3.Find_Class"
             android:label="Find_Class" >
         </activity>
 
-        <activity android:name=".Scheduler"
+        <activity android:name="com.example.mikechen.ma4.classfinder3.Scheduler"
                   android:label="Scheduler">
 
         </activity>
 
-        <activity android:name=".Schedule_ListView"
+        <activity android:name="com.example.mikechen.ma4.classfinder3.Schedule_ListView"
                   android:label="Scheduler_ListView">
         </activity>
 
         <service
-            android:name=".MyInternetService"
+            android:name="com.example.mikechen.ma4.classfinder3.MyInternetService"
             android:enabled="true"
             android:exported="true" >
         </service>

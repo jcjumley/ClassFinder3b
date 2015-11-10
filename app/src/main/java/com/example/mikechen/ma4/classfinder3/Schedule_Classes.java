@@ -1,10 +1,10 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -39,6 +39,7 @@ public class Schedule_Classes {
             }
             SyncClasses(scheduleClass.CourseNumber);
         }
+        //Classes.add(scheduleClass);
     }
 
     private int getCount(int courseNumber) {
@@ -60,19 +61,26 @@ public class Schedule_Classes {
     }
 
     private void SyncClasses(int course_number){
-        String sql = "SELECT * FROM " + DBHelper.DATABASE_TABLE_COURSE + " WHERE "
-                + " class_num = " + course_number;
-        Cursor cursor = DB.rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
+        SQLiteDatabase db = DB.getReadableDatabase();
+        String[] columns = {"*"};
+        String[] selectionArgs = {course_number + ""};
+        Cursor cursor = db.query(DBHelper.DATABASE_TABLE_COURSE, columns, "class_num=?", selectionArgs, null, null, null );
+        cursor.moveToFirst();
+        int count = cursor.getCount();
+        int i = 0;
+        if (count == 0) {
+            Log.d("Schedule", "No class with that number");
+        } else {
+            while (i < count) {
                 int course = cursor.getInt(0);
                 String teacher = cursor.getString(1);
                 int time = cursor.getInt(2);
-                int enroled = cursor.getInt(3);
+                int enrolled = cursor.getInt(3);
                 int limit = cursor.getInt(4);
-                Schedule_Class c = new Schedule_Class(course,teacher, time, enroled, limit, null);
+                Schedule_Class c = new Schedule_Class(course, teacher, time, enrolled, limit, null);
                 Classes.add(c);
                 cursor.moveToNext();
+                i++;
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 
 import android.content.Context;
 import android.database.Cursor;

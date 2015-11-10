@@ -1,4 +1,4 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

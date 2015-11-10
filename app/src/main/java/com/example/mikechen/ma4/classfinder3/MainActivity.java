@@ -1,4 +1,4 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

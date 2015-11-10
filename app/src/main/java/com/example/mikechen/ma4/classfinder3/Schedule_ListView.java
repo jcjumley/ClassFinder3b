@@ -1,4 +1,4 @@
-package com.example.mikechen.ma4.classfinder3a;
+package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -48,21 +48,18 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
     private void setScheduleArray() {
         mSchedule = sSchedule.GetClasses();
         Iterator iterator = mSchedule.iterator();
+        mScheduleArray.clear();
         while (iterator.hasNext()){
-            mScheduleArray.add(iterator.toString());
-            iterator.next();
+            Schedule_Class sClass = (Schedule_Class) iterator.next();
+            mScheduleArray.add(sClass.CourseNumber + "");
         }
     }
 
     public void addItems(Schedule_Class c) {
         sSchedule.AddClass(c);
         setScheduleArray();
-        i++;
-        ArrayList<Schedule_Class> s = sSchedule.GetClasses();
-        mScheduleArray.clear();
-        while (!s.isEmpty()) {
-            mScheduleArray.add(s.remove(0).CourseNumber + "");
-        }
+        i = 5236;
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
