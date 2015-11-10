@@ -71,6 +71,11 @@
         <activity android:name="com.example.mikechen.ma4.classfinder3.Schedule_ListView"
                   android:label="Scheduler_ListView">
         </activity>
+        <activity android:name="com.example.mikechen.ma4.classfinder3.Course_List"
+                  android:label="Course_List">
+
+        </activity>
+
 
         <service
             android:name="com.example.mikechen.ma4.classfinder3.MyInternetService"
