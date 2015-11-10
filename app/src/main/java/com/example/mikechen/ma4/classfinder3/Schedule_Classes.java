@@ -74,10 +74,10 @@ public class Schedule_Classes {
             while (i < count) {
                 int course = cursor.getInt(0);
                 String teacher = cursor.getString(1);
-                int time = cursor.getInt(2);
+                String times = cursor.getString(2);
                 int enrolled = cursor.getInt(3);
                 int limit = cursor.getInt(4);
-                Schedule_Class c = new Schedule_Class(course, teacher, time, enrolled, limit, null);
+                Schedule_Class c = new Schedule_Class(course, teacher, times, enrolled, limit, null);
                 Classes.add(c);
                 cursor.moveToNext();
                 i++;

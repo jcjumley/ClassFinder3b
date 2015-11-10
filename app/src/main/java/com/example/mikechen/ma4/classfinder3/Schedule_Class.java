@@ -8,15 +8,15 @@ import java.util.ArrayList;
 public class Schedule_Class {
     public int CourseNumber;
     public String Teacher;
-    public int Time;
+    public String Times;
     public int Enrold;
     public int Limit;
     public ArrayList<Schedule_Class> Prerequisits;
 
-    public Schedule_Class(int courseNumber, String teacher, int time, int enrold, int limit, ArrayList<Schedule_Class> prerequisits){
+    public Schedule_Class(int courseNumber, String teacher, String times, int enrold, int limit, ArrayList<Schedule_Class> prerequisits){
         CourseNumber = courseNumber;
         Teacher = teacher;
-        Time = time;
+        Times = times;
         Enrold = enrold;
         Limit = limit;
         Prerequisits = prerequisits;

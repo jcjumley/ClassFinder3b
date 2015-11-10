@@ -48,6 +48,11 @@
         <activity
             android:name="com.example.mikechen.ma4.classfinder3.MapsActivity"
             android:label="@string/title_activity_maps" >
+            <intent-filter>
+                <action android:name="android.intent.action.Maps" />
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.example.mikechen.ma4.classfinder3.Home"
