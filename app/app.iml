@@ -145,5 +145,7 @@
     <orderEntry type="library" exported="" name="play-services-nearby-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-panorama-8.3.0" level="project" />
+    <orderEntry type="module" module-name="opencsv-3.6" exported="" />
+    <orderEntry type="module" module-name="2opencsv-3.6" exported="" />
   </component>
 </module>

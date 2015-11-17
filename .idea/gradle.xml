@@ -10,7 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/2opencsv-3.6" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/opencsv-3.6" />
           </set>
         </option>
       </GradleProjectSettings>

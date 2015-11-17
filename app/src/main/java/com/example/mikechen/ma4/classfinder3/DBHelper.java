@@ -6,6 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.opencsv.CSVReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -16,18 +22,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_LNAME = "lastname";
     public static final String KEY_GENDER = "gender";
     public static final String KEY_USER = "username";
-    public static final String KEY_REGISTER_DATE="register_date";
+    public static final String KEY_REGISTER_DATE = "register_date";
 
     //    course table attribute
-    public static final String KEY_CLASS_NUM= "class_num";
-    public static final String KEY_SECTION_NUM= "section_num";
-    public static final String KEY_PROF="prof_name";
-    public static final String KEY_TIMES="times";
-    public static final String KEY_ENRLD="enrld_ple";
-    public static final String KEY_LIMIT="limit_ple";
-
-
-
+    public static final String KEY_CLASS_NUM = "class_num";
+    public static final String KEY_SECTION_NUM = "section_num";
+    public static final String KEY_PROF = "prof_name";
+    public static final String KEY_TIMES = "times";
+    public static final String KEY_ENRLD = "enrld_ple";
+    public static final String KEY_LIMIT = "limit_ple";
+    public static final String KEY_DEPT = "department";
+    public static final String KEY_BUILD = "building";
     DBHelper DB = null;
     private static final String DATABASE_NAME = "srikanth2.db";
     private static final int DATABASE_VERSION = 2;
@@ -36,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_TABLE_REGISTER = "registerTB";
     private static final String CREATE_TABLE_REGISTER =
             "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_REGISTER + "(" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "firstname TEXT NOT NULL, lastname TEXT NOT NULL, gender TEXT NOT NULL, username TEXT NOT NULL," +
                     " password TEXT NOT NULL);";
 
@@ -45,15 +50,14 @@ public class DBHelper extends SQLiteOpenHelper {
     // HOW TO SET ID ARE THE SAME IN BOTH TABLE?
 //    ans: use sql to add the value from XXX to YYY
     //    course table
-    public static final String DATABASE_TABLE_COURSE="courseTB";
-    private static final String CREATE_TABLE_COURSE =
-            "CREATE TABLE IF NOT EXISTS "+DATABASE_TABLE_COURSE+"("+KEY_CLASS_NUM+" INTEGER PRIMARY KEY, "
-                    + KEY_PROF + " TEXT NOT NULL, "+
-                    KEY_TIMES + " TEXT NOT NULL, " +KEY_ENRLD+" INT NOT NULL, "+KEY_LIMIT+" INT NOT NULL);";
+    public static final String DATABASE_TABLE_COURSE = "courseTB";
+    private static final String CREATE_TABLE_COURSE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_COURSE + "(" + KEY_DEPT +
+            " TEXT NOT NULL," + KEY_CLASS_NUM + "INTEGER PRIMARY KEY" + KEY_TIMES + " TEXT NOT NULL, " + KEY_ENRLD +
+            " INT NOT NULL," + KEY_LIMIT + " INT NOT NULL," + KEY_PROF + " TEXT NOT NULL, " +
+            KEY_BUILD + "TEXT NOT NULL);";
 
-    //  Schedule Table
-    public static final String DATABASE_TABLE_SCHEDULE_CLASSES="scheduleTB";
-    private static final String CREATE_TABLE_SCHEDULE_CLASSES = "CREATE TABLE IF NOT EXISTS "+DATABASE_TABLE_SCHEDULE_CLASSES+"("+
+    public static final String DATABASE_TABLE_SCHEDULE_CLASSES = "scheduleTB";
+    private static final String CREATE_TABLE_SCHEDULE_CLASSES = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_SCHEDULE_CLASSES + "(" +
             "number INT NOT NULL, FOREIGN KEY (number) REFERENCES " + DATABASE_TABLE_COURSE + "(" + KEY_CLASS_NUM + "));";
 
     private static DBHelper instance;
@@ -75,20 +79,58 @@ public class DBHelper extends SQLiteOpenHelper {
 
         this.db = db;
 
-        try{
+        try {
             db.execSQL(CREATE_TABLE_COURSE);
             db.execSQL(CREATE_TABLE_REGISTER);
             db.execSQL(CREATE_TABLE_SCHEDULE_CLASSES);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+        try {
+            insertFromCSV();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            String TAG="insertFromCSV";
+            Log.d(TAG,"csv error");
         }
     }
 
+    public void insertFromCSV() throws FileNotFoundException {
+        //        figure out where shoud this fileName should be 
+
+        String fileName = "course_list.csv";
+        CSVReader reader = new CSVReader(new FileReader(fileName));
+        String line = "";
+        String tableName = "courseTB";
+        String columns = "department, class_num, times, enrld_ple, limit_ple, prof_name, building";
+        String str1 = "INSERT INTO " + tableName + " (" + columns + ") values(";
+        String str2 = ");";
+        db.beginTransaction();
+        try {
+            while ((reader.readNext()) != null) {
+                StringBuilder sb = new StringBuilder(str1);
+                String[] str = line.split(",");
+                sb.append("'" + str[0] + "',");
+                sb.append(str[1] + "',");
+                sb.append(str[2] + "',");
+                sb.append(str[3] + "',");
+                sb.append(str[4] + "'");
+                sb.append(str[5] + "'");
+                sb.append(str[6] + "'");
+                sb.append(str2);
+                db.execSQL(sb.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String TAG ="onUpgrade";
-        Log.w(TAG, "update the database from the version"+oldVersion+"to"+newVersion);
+        String TAG = "onUpgrade";
+        Log.w(TAG, "update the database from the version" + oldVersion + "to" + newVersion);
 
         // TODO Auto-generated method stub
 
@@ -103,10 +145,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         getWritableDatabase();
     }
-
-
-
-
 
 
 //    public Cursor getDetails(String text) throws SQLException
