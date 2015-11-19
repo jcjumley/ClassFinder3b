@@ -44,16 +44,11 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         //mAdd = (Button)findViewById(R.id.schedule_add);
         //mAdd.setOnClickListener(this);
 
-        Schedule_Class c1 = new Schedule_Class(5000, "Alex", "M,W,F", 30, 50, "CSE", "Caldwell", null);
-        Schedule_Class c2 = new Schedule_Class(3000, "Anna", "T,Th", 25, 25, "CSE", "Caldwell", null);
-        Schedule_Class c3 = new Schedule_Class(5326, "Adam", "M,W,F", 30, 35, "CSE", "Caldwell", null);
-        Schedule_Class c4 = new Schedule_Class(5324, "Ben", "M,W,F", 25, 40, "CSE", "Caldwell", null);
-        Schedule_Class c5 = new Schedule_Class(5911, "Zach", "T,Th", 25, 30, "CSE", "Caldwell", null);
-        addItems(c1);
-        addItems(c2);
-        addItems(c3);
-        addItems(c4);
-        addItems(c5);
+        addItems(5000);
+        addItems(3000);
+        addItems(5326);
+        addItems(5324);
+        addItems(5911);
     }
 
     private void setScheduleArray() {
@@ -66,10 +61,9 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         }
     }
 
-    public void addItems(Schedule_Class c) {
+    public void addItems(int c) {
         sSchedule.AddClass(c);
         setScheduleArray();
-        i = 5236;
         mAdapter.notifyDataSetChanged();
     }
 

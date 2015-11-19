@@ -19,16 +19,15 @@ public class Schedule_Classes {
         DB = DBHelper.getHelper(context);
         Classes = new ArrayList<Schedule_Class>();
         SQLiteDatabase db = DB.getWritableDatabase();
-        DB.onCreate(db);
     }
 
-    public void AddClass(Schedule_Class scheduleClass){
+    public void AddClass(int CourseNumber){
         //int i = getCount(scheduleClass.CourseNumber);
 
         SQLiteDatabase db = DB.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("number", scheduleClass.CourseNumber);
+        values.put("number", CourseNumber);
 
         if (1 != 0) {
             try {
@@ -37,7 +36,7 @@ public class Schedule_Classes {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            SyncClasses(scheduleClass.CourseNumber);
+            SyncClasses(CourseNumber);
         }
         //Classes.add(scheduleClass);
     }
@@ -72,14 +71,14 @@ public class Schedule_Classes {
             Log.d("Schedule", "No class with that number");
         } else {
             while (i < count) {
-                int course = cursor.getInt(0);
-                String teacher = cursor.getString(1);
-                String times = cursor.getString(2);
-                int enrolled = cursor.getInt(3);
-                int limit = cursor.getInt(4);
-                String department = cursor.getString(5);
+                String department = cursor.getString(0);
+                int course = cursor.getInt(1);
+                String teacher = cursor.getString(2);
+                String times = cursor.getString(3);
+                int enrolled = cursor.getInt(4);
+                int limit = cursor.getInt(5);
                 String building = cursor.getString(6);
-                Schedule_Class c = new Schedule_Class(course, teacher, times, enrolled, limit, department, building, null);
+                Schedule_Class c = new Schedule_Class(department, course, teacher, times, enrolled, limit, building, null);
                 Classes.add(c);
                 cursor.moveToNext();
                 i++;
