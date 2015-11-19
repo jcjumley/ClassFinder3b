@@ -44,11 +44,11 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         //mAdd = (Button)findViewById(R.id.schedule_add);
         //mAdd.setOnClickListener(this);
 
-        Schedule_Class c1 = new Schedule_Class(5000, "Alex", "M,W,F", 30, 50, null);
-        Schedule_Class c2 = new Schedule_Class(3000, "Anna", "T,Th", 25, 25, null);
-        Schedule_Class c3 = new Schedule_Class(5326, "Adam", "M,W,F", 30, 35, null);
-        Schedule_Class c4 = new Schedule_Class(5324, "Ben", "M,W,F", 25, 40, null);
-        Schedule_Class c5 = new Schedule_Class(5911, "Zach", "T,Th", 25, 30, null);
+        Schedule_Class c1 = new Schedule_Class(5000, "Alex", "M,W,F", 30, 50, "CSE", "Caldwell", null);
+        Schedule_Class c2 = new Schedule_Class(3000, "Anna", "T,Th", 25, 25, "CSE", "Caldwell", null);
+        Schedule_Class c3 = new Schedule_Class(5326, "Adam", "M,W,F", 30, 35, "CSE", "Caldwell", null);
+        Schedule_Class c4 = new Schedule_Class(5324, "Ben", "M,W,F", 25, 40, "CSE", "Caldwell", null);
+        Schedule_Class c5 = new Schedule_Class(5911, "Zach", "T,Th", 25, 30, "CSE", "Caldwell", null);
         addItems(c1);
         addItems(c2);
         addItems(c3);

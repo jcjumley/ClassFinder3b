@@ -77,7 +77,9 @@ public class Schedule_Classes {
                 String times = cursor.getString(2);
                 int enrolled = cursor.getInt(3);
                 int limit = cursor.getInt(4);
-                Schedule_Class c = new Schedule_Class(course, teacher, times, enrolled, limit, null);
+                String department = cursor.getString(5);
+                String building = cursor.getString(6);
+                Schedule_Class c = new Schedule_Class(course, teacher, times, enrolled, limit, department, building, null);
                 Classes.add(c);
                 cursor.moveToNext();
                 i++;

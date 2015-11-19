@@ -11,14 +11,18 @@ public class Schedule_Class {
     public String Times;
     public int Enrold;
     public int Limit;
+    public String Department;
+    public String Building;
     public ArrayList<Schedule_Class> Prerequisits;
 
-    public Schedule_Class(int courseNumber, String teacher, String times, int enrold, int limit, ArrayList<Schedule_Class> prerequisits){
+    public Schedule_Class(int courseNumber, String teacher, String times, int enrold, int limit, String department, String building, ArrayList<Schedule_Class> prerequisits){
         CourseNumber = courseNumber;
         Teacher = teacher;
         Times = times;
         Enrold = enrold;
         Limit = limit;
+        Building = building;
+        Department = department;
         Prerequisits = prerequisits;
     }
 }

@@ -52,9 +52,9 @@ public class DBHelper extends SQLiteOpenHelper {
     //    course table
     public static final String DATABASE_TABLE_COURSE = "courseTB";
     private static final String CREATE_TABLE_COURSE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_COURSE + "(" + KEY_DEPT +
-            " TEXT NOT NULL," + KEY_CLASS_NUM + "INTEGER PRIMARY KEY" + KEY_TIMES + " TEXT NOT NULL, " + KEY_ENRLD +
+            " TEXT NOT NULL, " + KEY_CLASS_NUM + " INTEGER PRIMARY KEY, " + KEY_TIMES + " TEXT NOT NULL, " + KEY_ENRLD +
             " INT NOT NULL," + KEY_LIMIT + " INT NOT NULL," + KEY_PROF + " TEXT NOT NULL, " +
-            KEY_BUILD + "TEXT NOT NULL);";
+            KEY_BUILD + " TEXT NOT NULL);";
 
     public static final String DATABASE_TABLE_SCHEDULE_CLASSES = "scheduleTB";
     private static final String CREATE_TABLE_SCHEDULE_CLASSES = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_SCHEDULE_CLASSES + "(" +
