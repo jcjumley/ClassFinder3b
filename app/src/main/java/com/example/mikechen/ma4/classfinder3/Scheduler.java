@@ -63,10 +63,13 @@ public class Scheduler extends Activity implements OnClickListener{
             case R.id.btnDrop:
                 db = DB.getWritableDatabase();
                 Schedule_Classes.DropClass(Integer.parseInt(courseNumber.getText().toString()), db);
+                Toast.makeText(getApplicationContext(), courseNumber.getText().toString() + " dropped successfully", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.clrbtn:
                 db = DB.getWritableDatabase();
                 Schedule_Classes.ClearClasses(db);
+                Toast.makeText(getApplicationContext(), "All classes dropped successfully", Toast.LENGTH_SHORT).show();
+                break;
         }
 
     }
