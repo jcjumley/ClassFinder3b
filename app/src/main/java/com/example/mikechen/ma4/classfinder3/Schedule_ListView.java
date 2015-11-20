@@ -43,12 +43,6 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
 
         //mAdd = (Button)findViewById(R.id.schedule_add);
         //mAdd.setOnClickListener(this);
-
-        addItems(5000);
-        addItems(3000);
-        addItems(5326);
-        addItems(5324);
-        addItems(5911);
     }
 
     private void setScheduleArray() {
@@ -57,14 +51,8 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         mScheduleArray.clear();
         while (iterator.hasNext()){
             Schedule_Class sClass = (Schedule_Class) iterator.next();
-            mScheduleArray.add("CSE " + sClass.CourseNumber + "          " + sClass.Times);
+            mScheduleArray.add(sClass.Department + "     " + sClass.CourseNumber + "          " + sClass.Times);
         }
-    }
-
-    public void addItems(int c) {
-        sSchedule.AddClass(c);
-        setScheduleArray();
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override

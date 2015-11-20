@@ -35,6 +35,8 @@ public class Find_Class extends Activity implements OnClickListener {
                 startActivity(i);
                 break;
             case R.id.Information:
+                Intent in = new Intent(getBaseContext(), Course_List.class);
+                startActivity(in);
                 break;
         }
     }

@@ -9,13 +9,14 @@ public class Schedule_Class {
     public String Department;
     public int CourseNumber;
     public String Teacher;
+    public String Name;
     public String Times;
     public int Enrold;
     public int Limit;
     public String Building;
     public ArrayList<Schedule_Class> Prerequisits;
 
-    public Schedule_Class(String department, int courseNumber, String teacher, String times, int enrold, int limit, String building, ArrayList<Schedule_Class> prerequisits){
+    public Schedule_Class(String department, int courseNumber, String teacher, String name, String times, int enrold, int limit, String building, ArrayList<Schedule_Class> prerequisits){
         Department = department;
         CourseNumber = courseNumber;
         Teacher = teacher;

@@ -12,45 +12,68 @@ import java.util.ArrayList;
  * Created by groge on 11/3/2015.
  */
 public class Schedule_Classes {
-    DBHelper DB;
-    private ArrayList<Schedule_Class> Classes;
+    static DBHelper DB;
+    private static ArrayList<Schedule_Class> Classes;
 
     public Schedule_Classes(Context context){
         DB = DBHelper.getHelper(context);
         Classes = new ArrayList<Schedule_Class>();
         SQLiteDatabase db = DB.getWritableDatabase();
+        SyncAllClasses();
     }
 
-    public void AddClass(int CourseNumber){
-        //int i = getCount(scheduleClass.CourseNumber);
-
-        SQLiteDatabase db = DB.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("number", CourseNumber);
-
-        if (1 != 0) {
-            try {
-                db.insert(DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES, null, values);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void SyncAllClasses(){
+        SQLiteDatabase db = DB.getReadableDatabase();
+        Cursor c = db.query(DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES, new String[]{"number"}, null, null, null, null, null);
+        if (c.moveToFirst()){
+            while (!c.isAfterLast()){
+                int courseNumber = c.getInt(0);
+                SyncClasses(courseNumber);
+                c.moveToNext();
             }
-            SyncClasses(CourseNumber);
+        }
+    }
+
+    public static void AddClass(int CourseNumber){
+        int i = getCount(CourseNumber);
+        SQLiteDatabase db = DB.getWritableDatabase();
+        if (i == 0) {
+            String[] columns = {"*"};
+            String[] selectionArgs = {CourseNumber + ""};
+            Cursor cursor = db.query(DBHelper.DATABASE_TABLE_COURSE, columns, "class_num=?", selectionArgs, null, null, null);
+            cursor.moveToFirst();
+            int count = cursor.getCount();
+            if (count == 0) {
+                Log.d("Schedule", "No class with the number " + CourseNumber);
+            }else {
+                ContentValues values = new ContentValues();
+                values.put("number", CourseNumber);
+                try {
+                    db.insert(DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES, null, values);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                SyncClasses(CourseNumber);
+            }
+        } else {
+            Log.d("Schedule", CourseNumber + " is already in the schedule");
         }
         //Classes.add(scheduleClass);
     }
 
-    private int getCount(int courseNumber) {
+    private static int getCount(int courseNumber) {
         SQLiteDatabase db = null;
         Cursor c = null;
         try {
             db = DB.getReadableDatabase();
-            String query = "select count(*) from " + DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES + " where number = "
-                    + courseNumber;
-            c = db.rawQuery(query, new String[] {"number"});
+            //String query = "select count(*) from " + DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES + " where number = "
+                    //+ courseNumber;
+            //c = db.rawQuery(query, new String[] {"number"});
+            c = db.query(DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES, new String[] {"number"}, "number=?", new String[] {courseNumber + ""},
+                    null, null, null);
             if (c.moveToFirst()) {
-                return c.getInt(0);
+                return c.getCount();
             }
             return 0;
         } catch (Exception e) {
@@ -59,39 +82,37 @@ public class Schedule_Classes {
         }
     }
 
-    private void SyncClasses(int course_number){
+    private static void SyncClasses(int course_number){
         SQLiteDatabase db = DB.getReadableDatabase();
         String[] columns = {"*"};
         String[] selectionArgs = {course_number + ""};
-        Cursor cursor = db.query(DBHelper.DATABASE_TABLE_COURSE, columns, "class_num=?", selectionArgs, null, null, null );
+        Cursor cursor = db.query(DBHelper.DATABASE_TABLE_COURSE, columns, "class_num=?", selectionArgs, null, null, null);
         cursor.moveToFirst();
         int count = cursor.getCount();
-        int i = 0;
         if (count == 0) {
-            Log.d("Schedule", "No class with that number");
+            Log.d("Schedule", "No class with the number " + course_number);
         } else {
-            while (i < count) {
-                String department = cursor.getString(0);
-                int course = cursor.getInt(1);
-                String teacher = cursor.getString(2);
-                String times = cursor.getString(3);
-                int enrolled = cursor.getInt(4);
-                int limit = cursor.getInt(5);
-                String building = cursor.getString(6);
-                Schedule_Class c = new Schedule_Class(department, course, teacher, times, enrolled, limit, building, null);
-                Classes.add(c);
-                cursor.moveToNext();
-                i++;
-            }
+            int course = cursor.getInt(0);
+            String teacher = cursor.getString(1);
+            String name = cursor.getString(2);
+            String times = cursor.getString(3);
+            int enrolled = cursor.getInt(4);
+            int limit = cursor.getInt(5);
+            String department = cursor.getString(6);
+            String building = cursor.getString(7);
+            Schedule_Class c = new Schedule_Class(department, course, teacher, name, times, enrolled, limit, building, null);
+            Classes.add(c);
+            cursor.moveToNext();
         }
     }
 
-    public void DropClasses(){
-
+    public static void DropClass(int courseNumber, SQLiteDatabase db){
+        db.delete(DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES, "number = " + courseNumber, null);
     }
 
-    public void ClearClasses(){
-
+    public static void ClearClasses(SQLiteDatabase db){
+        String delete = "delete from " + DBHelper.DATABASE_TABLE_SCHEDULE_CLASSES;
+        db.execSQL(delete);
     }
 
     public ArrayList<Schedule_Class> GetClasses(){

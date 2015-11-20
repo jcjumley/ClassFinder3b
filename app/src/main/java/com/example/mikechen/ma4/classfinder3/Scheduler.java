@@ -18,6 +18,7 @@ public class Scheduler extends Activity implements OnClickListener{
 
     private Button addBtn;
     private Button dropBtn;
+    private Button clearBtn;
     private EditText courseNumber;
 
     protected DBHelper DB = new DBHelper(Scheduler.this);
@@ -33,12 +34,16 @@ public class Scheduler extends Activity implements OnClickListener{
         dropBtn = (Button)findViewById(R.id.btnDrop);
         dropBtn.setOnClickListener(this);
 
+        clearBtn = (Button)findViewById(R.id.clrbtn);
+        clearBtn.setOnClickListener(this);
+
         
         courseNumber = (EditText)findViewById(R.id.EditCourseNum);
 
     }
 
     public void onClick(View v){
+        SQLiteDatabase db;
         switch (v.getId()){
             case R.id.btnAdd:
                 String course_num=courseNumber.getText().toString();
@@ -56,38 +61,20 @@ public class Scheduler extends Activity implements OnClickListener{
                 }
                 break;
             case R.id.btnDrop:
+                db = DB.getWritableDatabase();
+                Schedule_Classes.DropClass(Integer.parseInt(courseNumber.getText().toString()), db);
+                break;
+            case R.id.clrbtn:
+                db = DB.getWritableDatabase();
+                Schedule_Classes.ClearClasses(db);
         }
 
     }
     public void addCourse(String coursenum){
-        SQLiteDatabase db = DB.getWritableDatabase();
-//        SQLiteDatabaseDatabase db= DD.createRegister(values);
-        ContentValues values = new ContentValues();
-        values.put("class_num", coursenum);
+        Schedule_Classes.AddClass(Integer.parseInt(coursenum));
 
-        // Create a new map of values, where column names are the keys
-        String course_num=courseNumber.getText().toString();
+        Toast.makeText(getApplicationContext(), "your details submitted Successfully...", Toast.LENGTH_SHORT).show();
 
-        values.put(DBHelper.KEY_CLASS_NUM, course_num);
-        values.put(DBHelper.KEY_PROF,"ALEX");
-        values.put(DBHelper.KEY_TIMES,"M,W,F");
-        values.put(DBHelper.KEY_ENRLD,"30");
-        values.put(DBHelper.KEY_LIMIT,"50");
-
-// Insert the new row, returning the primary key value of the new row
-
-        try
-        {
-            db.insert(DBHelper.DATABASE_TABLE_COURSE, null, values);
-            // need to create a new table
-
-            Toast.makeText(getApplicationContext(), "your details submitted Successfully...", Toast.LENGTH_SHORT).show();
-
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     }
