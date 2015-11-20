@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_LIMIT = "limit_ple";
     public static final String KEY_DEPT = "department";
     public static final String KEY_BUILD = "building";
+    public static final String KEY_COURSE="course_name";
     DBHelper DB = null;
     private static final String DATABASE_NAME = "srikanth2.db";
     private static final int DATABASE_VERSION = 2;
@@ -51,10 +52,9 @@ public class DBHelper extends SQLiteOpenHelper {
 //    ans: use sql to add the value from XXX to YYY
     //    course table
     public static final String DATABASE_TABLE_COURSE = "courseTB";
-    private static final String CREATE_TABLE_COURSE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_COURSE + "(" + KEY_DEPT +
-            " TEXT NOT NULL, " + KEY_CLASS_NUM + " INTEGER PRIMARY KEY, " + KEY_TIMES + " TEXT NOT NULL, " + KEY_ENRLD +
-            " INT NOT NULL," + KEY_LIMIT + " INT NOT NULL," + KEY_PROF + " TEXT NOT NULL, " +
-            KEY_BUILD + " TEXT NOT NULL);";
+    private static final String CREATE_TABLE_COURSE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_COURSE +"("+ KEY_CLASS_NUM + " INTEGER PRIMARY KEY, " +
+            KEY_PROF + " TEXT NOT NULL, " + KEY_COURSE + " TEXT NOT NULL, " + KEY_TIMES + " TEXT NOT NULL, " + KEY_ENRLD + " INT NOT NULL," + KEY_LIMIT + " INT NOT NULL," +
+            KEY_DEPT +" TEXT NOT NULL, "+ KEY_BUILD + " TEXT NOT NULL);";
 
     public static final String DATABASE_TABLE_SCHEDULE_CLASSES = "scheduleTB";
     private static final String CREATE_TABLE_SCHEDULE_CLASSES = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_SCHEDULE_CLASSES + "(" +
@@ -97,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertFromCSV() throws FileNotFoundException {
-        //        figure out where shoud this fileName should be 
+        //        figure out where shoud this fileName be 
 
         String fileName = "course_list.csv";
         CSVReader reader = new CSVReader(new FileReader(fileName));
