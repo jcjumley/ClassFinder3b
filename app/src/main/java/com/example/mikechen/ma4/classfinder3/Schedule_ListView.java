@@ -20,7 +20,7 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
 
     ArrayAdapter<String> mAdapter;
     ArrayList<String> mScheduleArray;
-    ArrayList<Schedule_Class> mSchedule;
+    ArrayList<Course> mSchedule;
 
     public static Schedule_Classes sSchedule;
 
@@ -50,7 +50,7 @@ public class Schedule_ListView extends Activity implements View.OnClickListener{
         Iterator iterator = mSchedule.iterator();
         mScheduleArray.clear();
         while (iterator.hasNext()){
-            Schedule_Class sClass = (Schedule_Class) iterator.next();
+            Course sClass = (Course) iterator.next();
             mScheduleArray.add(sClass.Department + "     " + sClass.CourseNumber + "          " + sClass.Times);
         }
     }

@@ -75,6 +75,11 @@
                   android:label="Course_List">
 
         </activity>
+        <activity
+            android:name="com.example.mikechen.ma4.classfinder3.Select_Class"
+            android:label="Select_Class">
+
+        </activity>
 
 
         <service

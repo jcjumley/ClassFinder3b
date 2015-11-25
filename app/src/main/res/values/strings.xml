@@ -32,5 +32,7 @@
 
     <string name="course">course</string>
     <string name="tableLayout1">tableLayout</string>
+    <string name="findClassSelectText">Select a course</string>
+    <string name="findClassCourseListBtn">Course List</string>
 
 </resources>

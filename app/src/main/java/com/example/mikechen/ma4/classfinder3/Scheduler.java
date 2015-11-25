@@ -2,6 +2,7 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ public class Scheduler extends Activity implements OnClickListener{
     private Button addBtn;
     private Button dropBtn;
     private Button clearBtn;
+    private Button crslstBtn;
     private EditText courseNumber;
 
     protected DBHelper DB = new DBHelper(Scheduler.this);
@@ -37,6 +39,8 @@ public class Scheduler extends Activity implements OnClickListener{
         clearBtn = (Button)findViewById(R.id.clrbtn);
         clearBtn.setOnClickListener(this);
 
+        crslstBtn = (Button)findViewById(R.id.crslstbtn);
+        crslstBtn.setOnClickListener(this);
         
         courseNumber = (EditText)findViewById(R.id.EditCourseNum);
 
@@ -54,6 +58,7 @@ public class Scheduler extends Activity implements OnClickListener{
                 {
                     invalid = true;
                     Toast.makeText(getApplicationContext(), "Enter the course number", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 else if (invalid==false){
                     addCourse(course_num);
@@ -69,6 +74,10 @@ public class Scheduler extends Activity implements OnClickListener{
                 db = DB.getWritableDatabase();
                 Schedule_Classes.ClearClasses(db);
                 Toast.makeText(getApplicationContext(), "All classes dropped successfully", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.crslstbtn:
+                Intent i = new Intent(getBaseContext(), Course_List.class);
+                startActivity(i);
                 break;
         }
 

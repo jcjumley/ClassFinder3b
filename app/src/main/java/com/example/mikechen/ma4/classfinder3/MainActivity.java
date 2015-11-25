@@ -41,6 +41,8 @@ public class MainActivity extends Activity implements OnClickListener
 
         DB = new DBHelper(getBaseContext());
         DB.onCreate(DB.getWritableDatabase());
+        GetClasses classes = new GetClasses(getBaseContext());
+        Schedule_Classes schedule = new Schedule_Classes(getBaseContext());
 
         mRegister = (Button)findViewById(R.id.register);
         mRegister.setOnClickListener(this);

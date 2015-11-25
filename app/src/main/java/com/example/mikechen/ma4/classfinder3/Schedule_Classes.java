@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 public class Schedule_Classes {
     static DBHelper DB;
-    private static ArrayList<Schedule_Class> Classes;
+    private static ArrayList<Course> Classes;
 
     public Schedule_Classes(Context context){
         DB = DBHelper.getHelper(context);
-        Classes = new ArrayList<Schedule_Class>();
+        Classes = new ArrayList<Course>();
         SQLiteDatabase db = DB.getWritableDatabase();
         SyncAllClasses();
     }
@@ -100,7 +100,7 @@ public class Schedule_Classes {
             int limit = cursor.getInt(5);
             String department = cursor.getString(6);
             String building = cursor.getString(7);
-            Schedule_Class c = new Schedule_Class(department, course, teacher, name, times, enrolled, limit, building, null);
+            Course c = new Course(department, course, teacher, name, times, enrolled, limit, building, null);
             Classes.add(c);
             cursor.moveToNext();
         }
@@ -115,7 +115,7 @@ public class Schedule_Classes {
         db.execSQL(delete);
     }
 
-    public ArrayList<Schedule_Class> GetClasses(){
+    public ArrayList<Course> GetClasses(){
         return Classes;
     }
 }
