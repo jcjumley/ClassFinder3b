@@ -19,7 +19,7 @@ public class Find_Class extends Activity implements OnClickListener {
     Button mInformation;
     Button mCouseList;
 
-    private static Course classInformation;
+    public static Course classInformation = new Course("", 0, "", "Select a course", "", 0, 0, "University Hall", null);
 
     public Find_Class(){
 
