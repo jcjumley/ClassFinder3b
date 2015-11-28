@@ -1,4 +1,5 @@
 package com.example.mikechen.ma4.classfinder3;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +11,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import au.com.bytecode.opencsv.CSVReader;
+
+//import com.opencsv.CSVReader;
+
 
 //import my.DataBase.R;
 
@@ -19,9 +32,13 @@ public class MainActivity extends Activity implements OnClickListener
 
     Button mLogin;
     Button mRegister;
-
+    TextView showCourse;
     EditText muname;
     EditText mpassword;
+    private SQLiteDatabase db;
+    private Spinner spMainSelectCategory;
+    private ArrayList<String> categoryList = new ArrayList<String>();
+
 
     DBHelper DB = null;
 
@@ -50,6 +67,10 @@ public class MainActivity extends Activity implements OnClickListener
         mLogin = (Button)findViewById(R.id.login);
         mLogin.setOnClickListener(this);
 
+
+        showCourse=(TextView)findViewById(R.id.showCourse);
+        insertCourse();
+
     }
     public void onPause(){
         super.onPause();
@@ -58,6 +79,57 @@ public class MainActivity extends Activity implements OnClickListener
     public void onStop(){
         super.onStop();
         Log.d(TAG, "onStop()called");
+    }
+    public void insertCourse(){
+        List<String[]> list = new ArrayList<String[]>();
+        String next[] = {};
+        try {
+            InputStreamReader csvStreamReader = new InputStreamReader(
+                    MainActivity.this.getAssets().open(
+                            "course.csv"));
+            CSVReader reader = new CSVReader(csvStreamReader);
+
+            String line = "";
+            String tableName = "courseTB";
+            String columns = "class_num, prof_name, course_name, times, enrld_ple, limit_ple, department, building ";
+            String str1 = "INSERT INTO " + tableName + " (" + columns + ") VALUES (";
+            String str2 = ");";
+
+//------------- It can read the content in CSV file, showcourse textfile will show it, but can't insert into DB
+//          db.beginTransaction();
+            /*
+            while ((reader.readNext()) != null) {
+                StringBuilder sb = new StringBuilder(str1);
+                String[] str = line.split(",");
+                sb.append(str[0] + ", '");//class num
+                sb.append(str[1] + "','");//prof nam
+                sb.append(str[2] + "','");//course nam
+                sb.append(str[3] + "',");//times
+                sb.append(str[4] + ",");//enrld people
+                sb.append(str[5] + ",'");//limit peo
+                sb.append(str[6] + "','"); //department
+                sb.append(str[7] + "'");
+                sb.append(str2);
+//                db.execSQL(sb.toString());
+            }
+*/
+            for (;;) {
+                next = reader.readNext();
+                if (next != null) {
+                    list.add(next);
+                } else {
+                    break;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        db.setTransactionSuccessful();
+//        db.endTransaction();
+
+        showCourse.setText(list.get(1)[1]);
+
     }
 
 

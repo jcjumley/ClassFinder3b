@@ -2,6 +2,7 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,7 @@ import java.util.List;
 public class Course_List extends ListActivity {
 
     DBHelper DB;
+    private SQLiteDatabase db;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -28,6 +30,7 @@ public class Course_List extends ListActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, values);
         setListAdapter(adapter);
+
     }
 
     @Override
@@ -62,5 +65,9 @@ public class Course_List extends ListActivity {
         List<String> departments = GetClasses.getDepartments();
         bool = departments.contains(item);
         return bool;
+
+
+
+
     }
 }

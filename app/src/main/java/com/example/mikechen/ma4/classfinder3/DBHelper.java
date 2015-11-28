@@ -6,12 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.opencsv.CSVReader;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -23,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_GENDER = "gender";
     public static final String KEY_USER = "username";
     public static final String KEY_REGISTER_DATE = "register_date";
+    public static final String KEY_USER_COURSE="userCourse";
 
     //    course table attribute
     public static final String KEY_CLASS_NUM = "class_num";
@@ -44,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE_REGISTER + "(" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "firstname TEXT NOT NULL, lastname TEXT NOT NULL, gender TEXT NOT NULL, username TEXT NOT NULL," +
-                    " password TEXT NOT NULL);";
+                    " password TEXT NOT NULL, userCourse TEXT);";
 
     //    another tabel about skill and interest
 
@@ -87,19 +82,16 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            insertFromCSV();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            String TAG="insertFromCSV";
-            Log.d(TAG,"csv error");
-        }
-    }
 
+    }
+/*
     public void insertFromCSV() throws FileNotFoundException {
         //        figure out where shoud this fileName be 
 
-        String fileName = "course_list.csv";
+        List<String[]> list = new ArrayList<String[]>();
+        String next[] = {};
+
+        String fileName = "course.csv";
         CSVReader reader = new CSVReader(new FileReader(fileName));
         String line = "";
         String tableName = "courseTB";
@@ -127,6 +119,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.setTransactionSuccessful();
         db.endTransaction();
     }
+    */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String TAG = "onUpgrade";
