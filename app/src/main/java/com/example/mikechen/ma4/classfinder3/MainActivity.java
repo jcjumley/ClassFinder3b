@@ -67,9 +67,16 @@ public class MainActivity extends Activity implements OnClickListener
         mLogin = (Button)findViewById(R.id.login);
         mLogin.setOnClickListener(this);
 
-
         showCourse=(TextView)findViewById(R.id.showCourse);
-        insertCourse();
+
+        db = DB.getWritableDatabase();
+        String count = "SELECT count(*) FROM courseTB";
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount<=0) {
+            insertCourse();
+        }
 
     }
     public void onPause(){
@@ -80,7 +87,9 @@ public class MainActivity extends Activity implements OnClickListener
         super.onStop();
         Log.d(TAG, "onStop()called");
     }
+
     public void insertCourse(){
+        db = DB.getWritableDatabase();
         List<String[]> list = new ArrayList<String[]>();
         String next[] = {};
         try {
@@ -88,19 +97,16 @@ public class MainActivity extends Activity implements OnClickListener
                     MainActivity.this.getAssets().open(
                             "course.csv"));
             CSVReader reader = new CSVReader(csvStreamReader);
-
-            String line = "";
+            String str[];
             String tableName = "courseTB";
             String columns = "class_num, prof_name, course_name, times, enrld_ple, limit_ple, department, building ";
             String str1 = "INSERT INTO " + tableName + " (" + columns + ") VALUES (";
             String str2 = ");";
-
 //------------- It can read the content in CSV file, showcourse textfile will show it, but can't insert into DB
-//          db.beginTransaction();
-            /*
-            while ((reader.readNext()) != null) {
+            db.beginTransaction();
+            while ((str = reader.readNext()) != null) {
                 StringBuilder sb = new StringBuilder(str1);
-                String[] str = line.split(",");
+//                String[] str = line.split(",");
                 sb.append(str[0] + ", '");//class num
                 sb.append(str[1] + "','");//prof nam
                 sb.append(str[2] + "','");//course nam
@@ -110,9 +116,8 @@ public class MainActivity extends Activity implements OnClickListener
                 sb.append(str[6] + "','"); //department
                 sb.append(str[7] + "'");
                 sb.append(str2);
-//                db.execSQL(sb.toString());
+                db.execSQL(sb.toString());
             }
-*/
             for (;;) {
                 next = reader.readNext();
                 if (next != null) {
@@ -121,15 +126,12 @@ public class MainActivity extends Activity implements OnClickListener
                     break;
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        db.setTransactionSuccessful();
-//        db.endTransaction();
-
-        showCourse.setText(list.get(1)[1]);
-
+        db.setTransactionSuccessful();
+        db.endTransaction();
+//        showCourse.setText(list.get(1)[1]);
     }
 
 
