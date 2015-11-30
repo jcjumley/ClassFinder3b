@@ -45,17 +45,17 @@ public class Course_List extends ListActivity {
             }
             ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values);
             setListAdapter(adapter);
-            Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item + " selected", Toast.LENGTH_SHORT).show();
         } else {
             Course sc = GetClasses.getClass(item);
             if (sc != null) {
                 Schedule_Classes.AddClass(sc.CourseNumber);
-                Toast.makeText(this, sc.Name + " Added to Schedule", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, sc.Name + " Added to Schedule", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(getBaseContext(), Scheduler.class);
                 startActivity(in);
             }
             else {
-                Toast.makeText(this, "No Such Class" + sc.Name, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "No Such Class" + sc.Name, Toast.LENGTH_SHORT).show();
             }
         }
     }

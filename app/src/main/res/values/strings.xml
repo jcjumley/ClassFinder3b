@@ -12,7 +12,7 @@
     <string name="Schedule">Schedule</string>
     <string name="Settings">Settings</string>
 
-    <string name="option1">Option 1</string>
+    <string name="lock_rotation">Lock Rotation</string>
     <string name="option2">Option 2</string>
     <string name="option3">Option 3</string>
     <string name="save">save</string>

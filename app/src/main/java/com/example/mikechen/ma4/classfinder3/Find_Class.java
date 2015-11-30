@@ -54,7 +54,7 @@ public class Find_Class extends Activity implements OnClickListener {
                 startActivity(in);
                 break;
             case R.id.Information:
-                in = new Intent(getBaseContext(), Select_Class.class);
+                in = new Intent(getBaseContext(), Information.class);
                 startActivity(in);
                 break;
             case R.id.select_from_course_list:

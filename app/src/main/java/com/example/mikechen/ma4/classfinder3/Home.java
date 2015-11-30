@@ -49,11 +49,12 @@ public class Home extends Activity implements OnClickListener {
                 break;
             case R.id.Schedule:
                 Intent sc=new Intent(getBaseContext(), Schedule_ListView.class);
-
                 startActivity(sc);
                 break;
 
             case R.id.Settings:
+                Intent settings = new Intent(getBaseContext(), Settings.class);
+                startActivity(settings);
                 break;
         }
     }

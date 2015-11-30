@@ -11,21 +11,21 @@ public class Course {
     public String Teacher;
     public String Name;
     public String Times;
-    public int Enrold;
+    public int Enrolled;
     public int Limit;
     public String Building;
-    public ArrayList<Course> Prerequisits;
+    public ArrayList<Course> Prerequisites;
 
-    public Course(String department, int courseNumber, String teacher, String name, String times, int enrold, int limit, String building, ArrayList<Course> prerequisits){
+    public Course(String department, int courseNumber, String teacher, String name, String times, int enrolled, int limit, String building, ArrayList<Course> prerequisites){
         Department = department;
         CourseNumber = courseNumber;
         Teacher = teacher;
         Name = name;
         Times = times;
-        Enrold = enrold;
+        Enrolled = enrolled;
         Limit = limit;
         Building = building;
-        Prerequisits = prerequisits;
+        Prerequisites = prerequisites;
     }
 
     @Override

@@ -42,17 +42,17 @@ public class Select_Class extends ListActivity {
             }
             ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, values);
             setListAdapter(adapter);
-            Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, item + " selected", Toast.LENGTH_SHORT).show();
         } else {
             Course sc = GetClasses.getClass(item);
             if (sc != null) {
                 Find_Class.setClassInformation(sc);
-                Toast.makeText(this, sc.Name + " Added for Information", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, sc.Name + " Added for Information", Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(getBaseContext(), Find_Class.class);
                 startActivity(in);
             }
             else {
-                Toast.makeText(this, "No Such Class" + sc.Name, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "No Such Class" + sc.Name, Toast.LENGTH_SHORT).show();
             }
         }
     }

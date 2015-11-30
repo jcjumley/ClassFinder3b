@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by mikechen on 10/25/15.
  */
@@ -65,8 +68,14 @@ public class Scheduler extends Activity implements OnClickListener{
                 break;
             case R.id.btnDrop:
                 db = DB.getWritableDatabase();
-                Schedule_Classes.DropClass(Integer.parseInt(courseNumber.getText().toString()), db);
-                Toast.makeText(getApplicationContext(), courseNumber.getText().toString() + " dropped successfully", Toast.LENGTH_SHORT).show();
+                String course = courseNumber.getText().toString();
+                if (scheduleContians(course)) {
+                    Schedule_Classes.DropClass(Integer.parseInt(course), db);
+                    Toast.makeText(getApplicationContext(), course + " dropped successfully", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Please enter course to drop", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.clrbtn:
                 db = DB.getWritableDatabase();
@@ -86,6 +95,17 @@ public class Scheduler extends Activity implements OnClickListener{
         Toast.makeText(getApplicationContext(), "your details submitted Successfully...", Toast.LENGTH_SHORT).show();
 
 
+    }
+
+    private boolean scheduleContians(String Course){
+        ArrayList<Course> courses = Schedule_Classes.GetClasses();
+        Iterator<Course> it = courses.iterator();
+        while (it.hasNext()){
+            if (Integer.toString(it.next().CourseNumber).equals(Course)){
+                return true;
+            }
+        }
+        return false;
     }
 
     }

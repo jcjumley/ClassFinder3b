@@ -80,6 +80,16 @@
             android:label="Select_Class">
 
         </activity>
+        <activity
+            android:name=".Settings"
+            android:label="Settings">
+
+        </activity>
+        <activity
+            android:name=".Information"
+            android:label="Information">
+
+        </activity>
 
 
         <service

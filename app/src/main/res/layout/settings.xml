@@ -7,8 +7,8 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/option1"
-        android:id="@+id/option_1"/>
+        android:text="@string/lock_rotation"
+        android:id="@+id/lock_rotation"/>
 
     <CheckBox
         android:layout_width="wrap_content"

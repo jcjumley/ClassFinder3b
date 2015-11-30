@@ -115,7 +115,7 @@ public class Schedule_Classes {
         db.execSQL(delete);
     }
 
-    public ArrayList<Course> GetClasses(){
+    public static ArrayList<Course> GetClasses(){
         return Classes;
     }
 }
