@@ -2,6 +2,7 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,11 @@ public class Scheduler extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scheduler);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         addBtn = (Button)findViewById(R.id.btnAdd);
         addBtn.setOnClickListener(this);

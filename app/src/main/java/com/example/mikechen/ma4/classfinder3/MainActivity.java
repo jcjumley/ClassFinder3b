@@ -1,8 +1,10 @@
 package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -55,6 +57,11 @@ public class MainActivity extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
 //        Log.d(TAG,"onCreate Called!!!");
         setContentView(R.layout.main);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         DB = new DBHelper(getBaseContext());
         DB.onCreate(DB.getWritableDatabase());

@@ -2,6 +2,8 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
 import android.view.View;
@@ -21,6 +23,11 @@ public class Home extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         mFindClass = (Button)findViewById(R.id.Find_Class);
         mFindClass.setOnClickListener(this);

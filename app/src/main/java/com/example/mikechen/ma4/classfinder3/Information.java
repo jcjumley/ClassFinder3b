@@ -1,6 +1,7 @@
 package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +24,11 @@ public class Information extends Activity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         mCourseName = (TextView) findViewById(R.id.course_name);
         mCourseName.setText("Name: " + Find_Class.classInformation.Name);

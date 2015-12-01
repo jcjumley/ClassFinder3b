@@ -3,6 +3,7 @@ package com.example.mikechen.ma4.classfinder3;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,11 @@ public class Registration extends Activity implements OnClickListener, OnItemSel
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         //Assignment of UI fields to the variables
         mSubmit = (Button)findViewById(R.id.submit);

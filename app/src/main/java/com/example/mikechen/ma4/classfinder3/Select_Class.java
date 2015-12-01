@@ -2,6 +2,7 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,11 @@ public class Select_Class extends ListActivity {
         super.onCreate(icicle);
 
         DB = new DBHelper(getBaseContext());
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         List<String> values = GetClasses.getDepartments();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

@@ -20,12 +20,20 @@ public class Settings extends Activity implements OnClickListener{
 
     Button mSaveButton;
 
+    public static boolean rotationLock = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
         mLockRotation = (CheckBox) findViewById(R.id.lock_rotation);
+        mLockRotation.setChecked(rotationLock);
 
         mOption2 = (CheckBox) findViewById(R.id.option_2);
 
@@ -39,11 +47,7 @@ public class Settings extends Activity implements OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.save_settings:
-                if (mLockRotation.isChecked()) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-                } else {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-                }
+                rotationLock = mLockRotation.isChecked();
                 Toast.makeText(getApplicationContext(), "Settings Saved", Toast.LENGTH_SHORT).show();
         }
     }

@@ -2,6 +2,7 @@ package com.example.mikechen.ma4.classfinder3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View.OnClickListener;
 import android.view.View;
@@ -29,6 +30,11 @@ public class Find_Class extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_class);
+
+        if (Settings.rotationLock)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         mCourse = (TextView)findViewById(R.id.selected_course);
         if (classInformation != null) {
