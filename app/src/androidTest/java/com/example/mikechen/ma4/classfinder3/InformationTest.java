@@ -28,7 +28,7 @@ public class InformationTest extends ActivityInstrumentationTestCase2 <Informati
         //tend to choose CSE,then choose Networkprogramming
 //        selectClassActivity.onListItemClick();
 
-        assertEquals( "Dreese Lab" ,buildingText);
+        assertEquals( "Building: University Hall" ,buildingText.getText().toString());
     }
     protected void tearDown() throws Exception { // cleans up
         informationActivity.finish();

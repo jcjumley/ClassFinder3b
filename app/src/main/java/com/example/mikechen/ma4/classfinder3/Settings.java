@@ -15,8 +15,6 @@ import android.widget.Toast;
 public class Settings extends Activity implements OnClickListener{
 
     CheckBox mLockRotation;
-    CheckBox mOption2;
-    CheckBox mOption3;
 
     Button mSaveButton;
 
@@ -34,10 +32,6 @@ public class Settings extends Activity implements OnClickListener{
 
         mLockRotation = (CheckBox) findViewById(R.id.lock_rotation);
         mLockRotation.setChecked(rotationLock);
-
-        mOption2 = (CheckBox) findViewById(R.id.option_2);
-
-        mOption3 = (CheckBox) findViewById(R.id.option_3);
 
         mSaveButton = (Button) findViewById(R.id.save_settings);
         mSaveButton.setOnClickListener(this);
